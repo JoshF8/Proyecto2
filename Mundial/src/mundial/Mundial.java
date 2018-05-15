@@ -5,17 +5,24 @@
  */
 package mundial;
 import Ventanas.*;
+import Listas.*;
+import javax.swing.JFrame;
 /**
  *
  * @author Josh
  */
 public class Mundial {
-
+    
     /**
      * @param args the command line arguments
      */
+    
+    public static ListaVentanas ventanas;
+    public static ListaGeneral usuarios;
+    
     public static void main(String[] args) {
-        
+        ventanas = new ListaVentanas(new NodoGeneral(new Login()));
+        ((JFrame) ventanas.nodoInicio.getItem()).setVisible(true);
     }
     
 }

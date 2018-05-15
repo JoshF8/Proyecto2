@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package Ventanas;
-
+import mundial.Mundial;
 /**
  *
  * @author Josh
@@ -14,8 +14,10 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form Login
      */
+    
+    public javax.swing.JFrame siguiente;
+    
     public Login() {
-        
         initComponents();
         setLocationRelativeTo(null);
     }
@@ -86,11 +88,14 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CrearCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearCuentaActionPerformed
-        // TODO add your handling code here:
+        Mundial.ventanas.crearVentana(new CrearCuenta(0));
     }//GEN-LAST:event_CrearCuentaActionPerformed
 
     private void IngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IngresarActionPerformed
-        // TODO add your handling code here:
+        if(TextoNick.getText().trim().equals("admin") && TextoContra.getText().trim().equals("a")){
+            Mundial.ventanas.crearVentana(new Administrador());
+            limpiarTextos();
+        }
     }//GEN-LAST:event_IngresarActionPerformed
 
     /**
@@ -126,6 +131,11 @@ public class Login extends javax.swing.JFrame {
                 new Login().setVisible(true);
             }
         });
+    }
+    
+    private void limpiarTextos(){
+        TextoNick.setText("");
+        TextoContra.setText("");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
