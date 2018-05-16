@@ -23,4 +23,22 @@ public class ListaGeneral {
         nuevoNodo.setAnterior(nodoFinal);
         nodoFinal = nuevoNodo;
     }
+    
+    public ListaGeneral eliminarNodo(NodoGeneral nodo){
+        nodo.setNull();
+        if(nodo != nodoInicio){
+            if(nodo != nodoFinal){
+                nodo.getAnterior().setSiguiente(nodo.getSiguiente());
+            }else{
+                nodo.getAnterior().setSiguiente(null);
+            }
+        }else{
+            if(nodo != nodoFinal){
+                nodo.getSiguiente().setAnterior(null);
+            }else{
+                return null;
+            }
+        }
+        return this;
+    }
 }
