@@ -88,7 +88,7 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CrearCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearCuentaActionPerformed
-        Mundial.ventanas.crearVentana(new CrearCuenta(0));
+        Mundial.ventanas.crearVentana(new CrearCuenta());
     }//GEN-LAST:event_CrearCuentaActionPerformed
 
     private void IngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IngresarActionPerformed

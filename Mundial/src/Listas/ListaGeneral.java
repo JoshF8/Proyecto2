@@ -31,11 +31,14 @@ public class ListaGeneral {
                 nodo.getAnterior().setSiguiente(nodo.getSiguiente());
             }else{
                 nodo.getAnterior().setSiguiente(null);
+                nodoFinal = nodo.getAnterior();
             }
         }else{
             if(nodo != nodoFinal){
                 nodo.getSiguiente().setAnterior(null);
+                nodoInicio = nodo.getSiguiente();
             }else{
+                nodoFinal = nodoInicio = null;
                 return null;
             }
         }

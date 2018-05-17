@@ -81,7 +81,7 @@ public class MenuCRUD extends javax.swing.JFrame {
     private void BotonCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonCrearActionPerformed
         switch(tipo){
             case 0:
-                Mundial.ventanas.crearVentana(new CrearCuenta(0));
+                Mundial.ventanas.crearVentana(new CrearCuenta());
                 break;
         }
     }//GEN-LAST:event_BotonCrearActionPerformed

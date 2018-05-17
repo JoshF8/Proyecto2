@@ -5,6 +5,7 @@
  */
 package Ventanas;
 import Listas.*;
+import javax.swing.JOptionPane;
 import mundial.*;
 /**
  *
@@ -54,7 +55,7 @@ public class MostrarInformacion extends javax.swing.JFrame {
         BotonAnterior = new javax.swing.JButton();
         BotonSiguiente = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 3)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/user.png"))); // NOI18N
@@ -64,8 +65,18 @@ public class MostrarInformacion extends javax.swing.JFrame {
         TextoInformacion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         BotonEditar.setText("Editar");
+        BotonEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonEditarActionPerformed(evt);
+            }
+        });
 
         BotonEliminar.setText("Eliminar");
+        BotonEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonEliminarActionPerformed(evt);
+            }
+        });
 
         BotonAnterior.setText("←");
         BotonAnterior.addActionListener(new java.awt.event.ActionListener() {
@@ -138,6 +149,38 @@ public class MostrarInformacion extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_BotonSiguienteActionPerformed
 
+    private void BotonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonEliminarActionPerformed
+        if(JOptionPane.showConfirmDialog(null, "¿Está seguro de eliminar el elemento mostrado?", "Eliminar", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == JOptionPane.YES_OPTION){
+            if(actual.getAnterior() != null){
+                actual = actual.getAnterior();
+                llenar();
+                actual = actual.getSiguiente();
+            }else{
+                if(actual.getSiguiente()!= null){
+                    actual = actual.getSiguiente();
+                    llenar();
+                    actual = actual.getAnterior();
+                }
+            }
+            if(listaMostrar.eliminarNodo(actual) == null){
+                switch(tipo){
+                    case 0:
+                        Mundial.usuarios = null;
+                        break;
+                }
+                dispose();
+            }
+        }
+    }//GEN-LAST:event_BotonEliminarActionPerformed
+
+    private void BotonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonEditarActionPerformed
+        switch(tipo){
+            case 0:
+                Mundial.ventanas.crearVentana(new CrearCuenta((Usuario)actual.getItem()));
+                break;
+        }
+    }//GEN-LAST:event_BotonEditarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -171,6 +214,11 @@ public class MostrarInformacion extends javax.swing.JFrame {
                 new MostrarInformacion(0, null).setVisible(true);
             }
         });
+    }
+    
+    @Override
+    public void dispose(){
+        Mundial.ventanas.cerrarVentana();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

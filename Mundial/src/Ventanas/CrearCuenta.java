@@ -20,11 +20,21 @@ public class CrearCuenta extends javax.swing.JFrame {
      * Creates new form CrearCuenta
      */
     public javax.swing.JFrame anterior;
+    private Usuario usuario;
+    private int tipo;
     
-    public CrearCuenta(int tipo) {
+    public CrearCuenta(Usuario usuario) {
+        tipo = 1;
+        this.usuario = usuario;
         initComponents();
         setLocationRelativeTo(null);
-        
+        llenarInformacion(usuario);
+    }
+    
+    public CrearCuenta(){
+        tipo = 0;
+        initComponents();
+        setLocationRelativeTo(null);
     }
     
 
@@ -200,16 +210,47 @@ public class CrearCuenta extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if(comprobarLlenado()){
-            if(Mundial.usuarios == null){
-                Mundial.usuarios = new ListaGeneral(new NodoGeneral(new Usuario(TextoCUI.getText(), TextoNombre.getText(), (TextoDia.getText()+"/"+TextoMes.getText()+"/"+TextoYear.getText()), TextoCorreo.getText(), TextoNick.getText(), TextoContra.getText())));
+            if(tipo == 0){
+                if(Mundial.usuarios == null){
+                    Mundial.usuarios = new ListaGeneral(new NodoGeneral(new Usuario(TextoCUI.getText(), TextoNombre.getText(), (TextoDia.getText()+"/"+TextoMes.getText()+"/"+TextoYear.getText()), TextoCorreo.getText(), TextoNick.getText(), TextoContra.getText())));
+                }else{
+                    Mundial.usuarios.crearNodo(new Usuario(TextoCUI.getText(), TextoNombre.getText(), (TextoDia.getText()+"/"+TextoMes.getText()+"/"+TextoYear.getText()), TextoCorreo.getText(), TextoNick.getText(), TextoContra.getText()));
+                }
+                JOptionPane.showMessageDialog(null, "Usuario guardado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                vaciar();
             }else{
-                Mundial.usuarios.crearNodo(new Usuario(TextoCUI.getText(), TextoNombre.getText(), (TextoDia.getText()+"/"+TextoMes.getText()+"/"+TextoYear.getText()), TextoCorreo.getText(), TextoNick.getText(), TextoContra.getText()));
+                
             }
         }else{
-            JOptionPane.showConfirmDialog(null, "Ha ingresado mal los datos, revíselos nuevamente.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Ha ingresado mal los datos, revíselos nuevamente.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void vaciar(){
+        TextoCUI.setText("");
+        TextoNombre.setText("");
+        TextoDia.setText("");
+        TextoMes.setText("");
+        TextoYear.setText("");
+        TextoCorreo.setText("");
+        TextoNick.setText("");
+        TextoContra.setText("");
+        TextoCContra.setText("");
+    }
+    
+    public void llenarInformacion(Usuario usuario){
+        TextoCUI.setText(usuario.getCUI());
+        TextoNombre.setText(usuario.getNombre());
+        String nac[] = usuario.getNac().split("/");
+        TextoDia.setText(nac[0]);
+        TextoMes.setText(nac[1]);
+        TextoYear.setText(nac[2]);
+        TextoCorreo.setText(usuario.getCorreo());
+        TextoNick.setText(usuario.getNick());
+        TextoContra.setText(usuario.getContra());
+        TextoCContra.setText(usuario.getContra());
+    }
+    
     private boolean comprobarLlenado(){
         return !(TextoCUI.getText().equals("") || TextoNombre.getText().equals("") || TextoDia.getText().equals("") || TextoMes.getText().equals("") || TextoYear.getText().equals("") || TextoCorreo.getText().equals("") || TextoNick.getText().equals("") || TextoContra.getText().equals("") || !TextoCContra.getText().equals(TextoContra.getText()));
     }
@@ -244,7 +285,7 @@ public class CrearCuenta extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CrearCuenta(0).setVisible(true);
+                new CrearCuenta().setVisible(true);
             }
         });
     }
