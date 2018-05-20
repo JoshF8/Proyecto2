@@ -32,11 +32,18 @@ public class MostrarInformacion extends javax.swing.JFrame {
             case 0:
                 llenarInformacion((Usuario) actual.getItem());
                 break;
+            case 1:
+                llenarInformacion((Equipo) actual.getItem());
+                break;
         }
     }
     
     private void llenarInformacion(Usuario usuario){
         TextoInformacion.setText("<html>CUI: " + usuario.getCUI() + "<br>Nombre: " + usuario.getNombre()+"<br>Fecha de nacimiento: " + usuario.getNac() + "<br>Correo: " + usuario.getCorreo() + "<br>NickName: "+ usuario.getNick() + "</html>");
+    }
+    
+    private void llenarInformacion(Equipo equipo){
+        TextoInformacion.setText("<html>Nombre: " + equipo.getNombre()+ "<br>Codigo equipo: " + equipo.getCodigo() +"<br>Cantidad de mundiales: " + equipo.getMundiales() + "<br>Año de creación: " + equipo.getCreacion() + "</html>");
     }
 
     /**
@@ -177,6 +184,9 @@ public class MostrarInformacion extends javax.swing.JFrame {
         switch(tipo){
             case 0:
                 Mundial.ventanas.crearVentana(new CrearCuenta((Usuario)actual.getItem()));
+                break;
+            case 1:
+                Mundial.ventanas.crearVentana(new FormularioEquipos((Equipo)actual.getItem()));
                 break;
         }
     }//GEN-LAST:event_BotonEditarActionPerformed

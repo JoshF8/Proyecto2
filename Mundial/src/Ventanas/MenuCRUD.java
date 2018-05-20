@@ -23,6 +23,9 @@ public class MenuCRUD extends javax.swing.JFrame {
         initComponents();
         this.tipo = tipo;
         this.setTitle("Menú " + valores[tipo]);
+        if(tipo == 0){
+            BotonCarga.setVisible(false);
+        }
         setLocationRelativeTo(null);
     }
 
@@ -37,6 +40,7 @@ public class MenuCRUD extends javax.swing.JFrame {
 
         BotonCrear = new javax.swing.JButton();
         BotonMostrar = new javax.swing.JButton();
+        BotonCarga = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -54,15 +58,22 @@ public class MenuCRUD extends javax.swing.JFrame {
             }
         });
 
+        BotonCarga.setText("Carga masiva");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(BotonCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48)
-                .addComponent(BotonMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(BotonCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(48, 48, 48)
+                        .addComponent(BotonMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(99, 99, 99)
+                        .addComponent(BotonCarga, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -72,7 +83,9 @@ public class MenuCRUD extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BotonCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BotonMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(BotonCarga, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         pack();
@@ -83,6 +96,9 @@ public class MenuCRUD extends javax.swing.JFrame {
             case 0:
                 Mundial.ventanas.crearVentana(new CrearCuenta());
                 break;
+            case 1:
+                Mundial.ventanas.crearVentana(new FormularioEquipos());
+                break;
         }
     }//GEN-LAST:event_BotonCrearActionPerformed
 
@@ -91,6 +107,9 @@ public class MenuCRUD extends javax.swing.JFrame {
         switch(tipo){
             case 0:
                 listaMostrar = Mundial.usuarios;
+                break;
+            case 1: 
+                listaMostrar = Mundial.equipos;
                 break;
         }
         if(listaMostrar != null){
@@ -141,6 +160,7 @@ public class MenuCRUD extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BotonCarga;
     private javax.swing.JButton BotonCrear;
     private javax.swing.JButton BotonMostrar;
     // End of variables declaration//GEN-END:variables

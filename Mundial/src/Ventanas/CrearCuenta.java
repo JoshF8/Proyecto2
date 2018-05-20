@@ -219,7 +219,10 @@ public class CrearCuenta extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Usuario guardado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
                 vaciar();
             }else{
-                
+                if(JOptionPane.showConfirmDialog(null, "¿Está seguro de guardar los cambios?", "", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == JOptionPane.YES_OPTION){
+                    guardar();
+                    dispose();
+                }
             }
         }else{
             JOptionPane.showMessageDialog(null, "Ha ingresado mal los datos, revíselos nuevamente.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -249,6 +252,15 @@ public class CrearCuenta extends javax.swing.JFrame {
         TextoNick.setText(usuario.getNick());
         TextoContra.setText(usuario.getContra());
         TextoCContra.setText(usuario.getContra());
+    }
+    
+    private void guardar(){
+        usuario.setCUI(TextoCUI.getText());
+        usuario.setNombre(TextoNombre.getText());
+        usuario.setNac(TextoDia.getText()+"/"+TextoMes.getText()+"/"+TextoYear.getText());
+        usuario.setCorreo(TextoCorreo.getText());
+        usuario.setNick(TextoNick.getText());
+        usuario.setContra(TextoContra.getText());
     }
     
     private boolean comprobarLlenado(){
