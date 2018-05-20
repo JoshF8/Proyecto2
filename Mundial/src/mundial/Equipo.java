@@ -11,17 +11,17 @@ package mundial;
  */
 public class Equipo {
     
-    private String Nombre;
-    private int Codigo, Mundiales, Creacion;
+    private String Nombre, Codigo;
+    private int Mundiales, Creacion;
     
-    public Equipo(String nombre, int codigo, int mundiales, int creacion){
+    public Equipo(String nombre, String codigo, int mundiales, int creacion){
         setNombre(nombre);
         setCodigo(codigo);
         setMundiales(mundiales);
         setCreacion(creacion);
     }
 
-    public int getCodigo() {
+    public String getCodigo() {
         return Codigo;
     }
 
@@ -37,7 +37,7 @@ public class Equipo {
         return Nombre;
     }
 
-    public void setCodigo(int Codigo) {
+    public void setCodigo(String Codigo) {
         this.Codigo = Codigo;
     }
 

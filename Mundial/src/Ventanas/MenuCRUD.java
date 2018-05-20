@@ -5,8 +5,14 @@
  */
 package Ventanas;
 import Listas.ListaGeneral;
+import Listas.NodoGeneral;
 import Mundial.*;
+import java.io.File;
+import java.util.Scanner;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import mundial.Equipo;
 import mundial.Mundial;
 /**
  *
@@ -14,7 +20,7 @@ import mundial.Mundial;
  */
 public class MenuCRUD extends javax.swing.JFrame {
     
-    private String valores[] = {"Usuarios", "Equipos", "Jugadores", "Estampas"};
+    private String valores[] = {"usuarios", "equipos", "jugadores", "estampas"};
     private int tipo;
     /**
      * Creates new form MenuCRUD
@@ -59,6 +65,11 @@ public class MenuCRUD extends javax.swing.JFrame {
         });
 
         BotonCarga.setText("Carga masiva");
+        BotonCarga.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonCargaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -119,6 +130,61 @@ public class MenuCRUD extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_BotonMostrarActionPerformed
 
+    private void BotonCargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonCargaActionPerformed
+        String texto[], mensajeError = "Las líneas ";
+        boolean error = false;
+        int contador = 0, limites[] = {0,4,8,4};
+        JFileChooser buscador = new JFileChooser();
+        buscador.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter("Archivos ecys", "ecys");
+        buscador.setFileFilter(filtro);
+        buscador.showOpenDialog(this);
+        File archivo = buscador.getSelectedFile();
+        if(archivo == null || archivo.getName().equals("")){
+            JOptionPane.showMessageDialog(null, "Archivo inválido.", "Archivo inválido", JOptionPane.ERROR_MESSAGE);
+        }else{
+            try {
+                Scanner lector = new Scanner(archivo);
+                while(lector.hasNext()){
+                    contador++;
+                    texto = lector.nextLine().split("#");
+                    System.out.println(contador);
+                    if(texto.length == limites[tipo]){
+                        if(!guardar(texto)){
+                            mensajeError += contador + ", ";
+                            error = true;
+                        }
+                    }else{
+                        error = true;
+                        mensajeError += contador + ", ";
+                    }
+                }
+            } catch (Exception e) {
+            } 
+            mensajeError += "han tenido un error y no se han podido almacenar.";
+            if(error){
+                JOptionPane.showMessageDialog(null, mensajeError, "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_BotonCargaActionPerformed
+
+    private boolean guardar(String datos[]){
+        try {
+            switch(tipo){
+                case 1:
+                    if(Mundial.equipos == null){
+                        Mundial.equipos = new ListaGeneral(new NodoGeneral(new Equipo(datos[0], datos[1], Integer.valueOf(datos[2]),Integer.valueOf(datos[3]))));
+                    }else{
+                        Mundial.equipos.crearNodo(new Equipo(datos[0], datos[1], Integer.valueOf(datos[2]),Integer.valueOf(datos[3])));
+                    }
+                    break;
+            }
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+    
     /**
      * @param args the command line arguments
      */

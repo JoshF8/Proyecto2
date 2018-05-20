@@ -135,9 +135,9 @@ public class FormularioEquipos extends javax.swing.JFrame {
             try {
                 if(tipo == 0){
                     if(Mundial.equipos == null){
-                        Mundial.equipos = new ListaGeneral(new NodoGeneral(new Equipo(TextoNombre.getText(), Integer.valueOf(TextoCodigo.getText()), Integer.valueOf(TextoMundiales.getText()),Integer.valueOf(TextoCreacion.getText()))));
+                        Mundial.equipos = new ListaGeneral(new NodoGeneral(new Equipo(TextoNombre.getText(), TextoCodigo.getText(), Integer.valueOf(TextoMundiales.getText()),Integer.valueOf(TextoCreacion.getText()))));
                     }else{
-                        Mundial.equipos.crearNodo(new Equipo(TextoNombre.getText(), Integer.valueOf(TextoCodigo.getText()), Integer.valueOf(TextoMundiales.getText()), Integer.valueOf(TextoCreacion.getText())));
+                        Mundial.equipos.crearNodo(new Equipo(TextoNombre.getText(), TextoCodigo.getText(), Integer.valueOf(TextoMundiales.getText()), Integer.valueOf(TextoCreacion.getText())));
                     }
                     JOptionPane.showMessageDialog(null, "Equipo guardado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
                     vaciar();
@@ -176,7 +176,7 @@ public class FormularioEquipos extends javax.swing.JFrame {
     private void guardar(){
         try {
             equipo.setNombre(TextoNombre.getText());
-            equipo.setCodigo(Integer.valueOf(TextoCodigo.getText()));
+            equipo.setCodigo(TextoCodigo.getText());
             equipo.setMundiales(Integer.valueOf(TextoMundiales.getText()));
             equipo.setCreacion(Integer.valueOf(TextoCreacion.getText()));
         } catch (Exception e) {
