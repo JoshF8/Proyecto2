@@ -305,6 +305,7 @@ public class CrearCuenta extends javax.swing.JFrame {
     @Override
     public void dispose(){
         Mundial.ventanas.cerrarVentana();
+        super.dispose();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

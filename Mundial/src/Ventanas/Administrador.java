@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Ventanas;
+import javax.swing.JOptionPane;
 import mundial.*;
 /**
  *
@@ -107,11 +108,19 @@ public class Administrador extends javax.swing.JFrame {
     }//GEN-LAST:event_BotonEquiposActionPerformed
 
     private void BotonJugadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonJugadoresActionPerformed
-        Mundial.ventanas.crearVentana(new MenuCRUD(2));
+        if(Mundial.equipos == null){
+            JOptionPane.showMessageDialog(null, "Aún no existen equipos para agregar jugadores.", "Error", JOptionPane.ERROR_MESSAGE);
+        }else{
+            Mundial.ventanas.crearVentana(new MenuCRUD(2));
+        }
     }//GEN-LAST:event_BotonJugadoresActionPerformed
 
     private void BotonEstampasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonEstampasActionPerformed
-        Mundial.ventanas.crearVentana(new MenuCRUD(3));
+        if(Mundial.jugadores == null){
+            JOptionPane.showMessageDialog(null, "Aún no existen jugadores para crear estampas.", "Error", JOptionPane.ERROR_MESSAGE);
+        }else{
+            Mundial.ventanas.crearVentana(new MenuCRUD(3));
+        }
     }//GEN-LAST:event_BotonEstampasActionPerformed
 
     /**
@@ -152,6 +161,7 @@ public class Administrador extends javax.swing.JFrame {
     @Override
     public void dispose(){
         Mundial.ventanas.cerrarVentana();
+        super.dispose();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

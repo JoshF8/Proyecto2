@@ -7,13 +7,12 @@ package Ventanas;
 import Listas.ListaGeneral;
 import Listas.NodoGeneral;
 import Mundial.*;
+import mundial.*;
 import java.io.File;
 import java.util.Scanner;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import mundial.Equipo;
-import mundial.Mundial;
 /**
  *
  * @author Josh
@@ -110,6 +109,12 @@ public class MenuCRUD extends javax.swing.JFrame {
             case 1:
                 Mundial.ventanas.crearVentana(new FormularioEquipos());
                 break;
+            case 2:
+                Mundial.ventanas.crearVentana(new FormularioJugador());
+                break;
+            case 3:
+                Mundial.ventanas.crearVentana(new FormularioEstampa());
+                break;
         }
     }//GEN-LAST:event_BotonCrearActionPerformed
 
@@ -121,6 +126,12 @@ public class MenuCRUD extends javax.swing.JFrame {
                 break;
             case 1: 
                 listaMostrar = Mundial.equipos;
+                break;
+            case 2:
+                listaMostrar = Mundial.jugadores;
+                break;
+            case 3:
+                listaMostrar = Mundial.estampas;
                 break;
         }
         if(listaMostrar != null){
@@ -148,7 +159,6 @@ public class MenuCRUD extends javax.swing.JFrame {
                 while(lector.hasNext()){
                     contador++;
                     texto = lector.nextLine().split("#");
-                    System.out.println(contador);
                     if(texto.length == limites[tipo]){
                         if(!guardar(texto)){
                             mensajeError += contador + ", ";
@@ -178,11 +188,37 @@ public class MenuCRUD extends javax.swing.JFrame {
                         Mundial.equipos.crearNodo(new Equipo(datos[0], datos[1], Integer.valueOf(datos[2]),Integer.valueOf(datos[3])));
                     }
                     break;
+                case 2:
+                    if(Mundial.jugadores == null){
+                        Mundial.jugadores = new ListaGeneral(new NodoGeneral(new Jugador(datos[0], datos[1], datos[2], datos[3], datos[4], datos[5], Integer.valueOf(datos[6]), datos[7])));
+                        Equipo equipo = buscarEquipo(datos[5]);
+                        equipo.jugadores = new ListaGeneral(new NodoGeneral(Mundial.jugadores.nodoFinal.getItem()));
+                    }else{
+                        Mundial.jugadores.crearNodo(new Jugador(datos[0], datos[1], datos[2], datos[3], datos[4], datos[5], Integer.valueOf(datos[6]), datos[7]));
+                        Equipo equipo = buscarEquipo(datos[5]);
+                        if(equipo.jugadores == null){
+                            equipo.jugadores = new ListaGeneral(new NodoGeneral(Mundial.jugadores.nodoFinal.getItem()));
+                        }else{
+                            equipo.jugadores.crearNodo(Mundial.jugadores.nodoFinal.getItem());
+                        }
+                    }
+                    break;
             }
         } catch (Exception e) {
             return false;
         }
         return true;
+    }
+    
+    private Equipo buscarEquipo(String codigo){
+        NodoGeneral actual = Mundial.equipos.nodoInicio;
+        while(actual != null){
+            if(((Equipo) actual.getItem()).getCodigo().equals(codigo)){
+                return ((Equipo) actual.getItem());
+            }
+            actual = actual.getSiguiente();
+        }
+        return null;
     }
     
     /**
@@ -223,6 +259,7 @@ public class MenuCRUD extends javax.swing.JFrame {
     @Override
     public void dispose(){
         Mundial.ventanas.cerrarVentana();
+        super.dispose();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

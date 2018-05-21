@@ -29,6 +29,7 @@ public class ListaGeneral {
         if(nodo != nodoInicio){
             if(nodo != nodoFinal){
                 nodo.getAnterior().setSiguiente(nodo.getSiguiente());
+                nodo.getSiguiente().setAnterior(nodo.getAnterior());
             }else{
                 nodo.getAnterior().setSiguiente(null);
                 nodoFinal = nodo.getAnterior();

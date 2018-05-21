@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package mundial;
-
+import Listas.*;
 /**
  *
  * @author Josh
@@ -13,6 +13,7 @@ public class Equipo {
     
     private String Nombre, Codigo;
     private int Mundiales, Creacion;
+    public ListaGeneral jugadores;
     
     public Equipo(String nombre, String codigo, int mundiales, int creacion){
         setNombre(nombre);

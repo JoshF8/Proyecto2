@@ -35,6 +35,9 @@ public class MostrarInformacion extends javax.swing.JFrame {
             case 1:
                 llenarInformacion((Equipo) actual.getItem());
                 break;
+            case 2:
+                llenarInformacion((Jugador) actual.getItem());
+                break;
         }
     }
     
@@ -44,6 +47,10 @@ public class MostrarInformacion extends javax.swing.JFrame {
     
     private void llenarInformacion(Equipo equipo){
         TextoInformacion.setText("<html>Nombre: " + equipo.getNombre()+ "<br>Codigo equipo: " + equipo.getCodigo() +"<br>Cantidad de mundiales: " + equipo.getMundiales() + "<br>Año de creación: " + equipo.getCreacion() + "</html>");
+    }
+    
+    private void llenarInformacion(Jugador jugador){
+        TextoInformacion.setText("<html>Nombre: " + jugador.getNombre() + "<br>Pposición: " + jugador.getPosicion() +"<br>Fecha de nacimiento: " + jugador.getNacimiento() + "<br>Altura: " + jugador.getAltura() + "<br>Peso: "+ jugador.getPeso() + "<br>Código del equipo: "+ jugador.getCodigoEquipo() + "<br>Dorsal: "+ jugador.getCamisola() + "<br>Código del equipo: "+ jugador.getCodigoEquipo() + "<br>Tipo de jugador: "+ jugador.getTipo() + "</html>");
     }
 
     /**
@@ -188,6 +195,9 @@ public class MostrarInformacion extends javax.swing.JFrame {
             case 1:
                 Mundial.ventanas.crearVentana(new FormularioEquipos((Equipo)actual.getItem()));
                 break;
+            case 2:
+                Mundial.ventanas.crearVentana(new FormularioJugador((Jugador) actual.getItem()));
+                break;
         }
     }//GEN-LAST:event_BotonEditarActionPerformed
 
@@ -229,6 +239,7 @@ public class MostrarInformacion extends javax.swing.JFrame {
     @Override
     public void dispose(){
         Mundial.ventanas.cerrarVentana();
+        super.dispose();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

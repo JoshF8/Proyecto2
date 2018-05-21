@@ -18,8 +18,8 @@ public class Mundial {
      */
     
     public static ListaVentanas ventanas;
-    public static ListaGeneral usuarios, equipos;
-    
+    public static ListaGeneral usuarios, equipos, jugadores, estampas;
+   
     public static void main(String[] args) {
         ventanas = new ListaVentanas(new NodoGeneral(new Login()));
         ((JFrame) ventanas.nodoInicio.getItem()).setVisible(true);

@@ -22,11 +22,6 @@ public class FormularioEquipos extends javax.swing.JFrame {
         initComponents();
         tipo = 0;
         setLocationRelativeTo(null);
-        /*NodoGeneral actual;
-        actual = Mundial.equipos.nodoInicio;
-        while (actual == null) {            
-            ComboEquipo.addItem(((Equipo)actual.getItem()).getNombre());
-        }*/
     }
     
     public FormularioEquipos(Equipo equipo){
@@ -222,6 +217,7 @@ public class FormularioEquipos extends javax.swing.JFrame {
      @Override
     public void dispose(){
         Mundial.ventanas.cerrarVentana();
+        super.dispose();
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
