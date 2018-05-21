@@ -22,11 +22,22 @@ public class FormularioEstampa extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         tipo = 0;
-        
         ComboRareza.removeAllItems();
         llenarCombo();
         ComboRareza.addItem("Normal");
         ComboRareza.addItem("Rara");
+    }
+    
+    public FormularioEstampa(Estampa estampa) {
+        initComponents();
+        setLocationRelativeTo(null);
+        tipo = 0;
+        this.estampa = estampa;
+        ComboRareza.removeAllItems();
+        llenarCombo();
+        ComboRareza.addItem("Normal");
+        ComboRareza.addItem("Rara");
+        llenarInformacion();
     }
     
 
@@ -133,6 +144,13 @@ public class FormularioEstampa extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void llenarInformacion(){
+        TextoImagen.setText(estampa.getRutaImagen());
+        ComboRareza.setSelectedIndex(estampa.getRareza());
+        ComboJugador.addItem(estampa.getNombre());
+        ComboJugador.setSelectedIndex(ComboJugador.getItemCount() - 1);
+    }
+    
     private Jugador buscarJugador(){
         NodoGeneral actual = Mundial.jugadores.nodoInicio;
         while(actual != null){

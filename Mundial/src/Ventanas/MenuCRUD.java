@@ -203,6 +203,20 @@ public class MenuCRUD extends javax.swing.JFrame {
                         }
                     }
                     break;
+                case 3:
+                    Jugador jugador = buscarJugador(datos[0]);
+                    if(Mundial.estampas == null){
+                        Mundial.estampas = new ListaGeneral(new NodoGeneral(new Estampa(datos[0], datos[1],Integer.valueOf(datos[2]), datos[3])));
+                        jugador.setEstampa((Estampa)Mundial.estampas.nodoFinal.getItem());
+                    }else{
+                        if(jugador.getEstampa() == null){
+                            Mundial.estampas.crearNodo(new Estampa(datos[0], datos[1],Integer.valueOf(datos[2]), datos[3]));
+                            jugador.setEstampa((Estampa)Mundial.estampas.nodoFinal.getItem());
+                        }else{
+                            return false;
+                        }
+                    }
+                    break;
             }
         } catch (Exception e) {
             return false;
@@ -215,6 +229,17 @@ public class MenuCRUD extends javax.swing.JFrame {
         while(actual != null){
             if(((Equipo) actual.getItem()).getCodigo().equals(codigo)){
                 return ((Equipo) actual.getItem());
+            }
+            actual = actual.getSiguiente();
+        }
+        return null;
+    }
+    
+    private Jugador buscarJugador(String nombre){
+        NodoGeneral actual = Mundial.jugadores.nodoInicio;
+        while(actual != null){
+            if(((Jugador)actual.getItem()).getNombre().equals(nombre)){
+                return (Jugador)actual.getItem();
             }
             actual = actual.getSiguiente();
         }
