@@ -4,7 +4,9 @@
  * and open the template in the editor.
  */
 package Ventanas;
-import mundial.Mundial;
+import mundial.*;
+import Listas.*;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Josh
@@ -95,6 +97,28 @@ public class Login extends javax.swing.JFrame {
         if(TextoNick.getText().trim().equals("admin") && TextoContra.getText().trim().equals("a")){
             Mundial.ventanas.crearVentana(new Administrador());
             limpiarTextos();
+        }else{
+            boolean encontrado = false;
+            if(Mundial.usuarios == null){
+                JOptionPane.showMessageDialog(null, "El usuario no existe.", "Error", JOptionPane.ERROR_MESSAGE);
+            }else{
+                NodoGeneral actual = Mundial.usuarios.nodoInicio;
+                while(actual != null){
+                    if(((Usuario)actual.getItem()).getNick().equals(TextoNick.getText())){
+                        if(((Usuario)actual.getItem()).getContra().equals(TextoContra.getText())){
+                            Mundial.ventanas.crearVentana(new VentanaUsuario((Usuario)actual.getItem()));
+                        }else{
+                            JOptionPane.showConfirmDialog(null, "La contraseña es incorrecta.", "Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                        encontrado = true;
+                        break;
+                    }
+                    actual = actual.getSiguiente();
+                }
+                if(!encontrado)
+                    JOptionPane.showMessageDialog(null, "El usuario no existe.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            
         }
     }//GEN-LAST:event_IngresarActionPerformed
 

@@ -6,7 +6,6 @@
 package Ventanas;
 import Listas.ListaGeneral;
 import Listas.NodoGeneral;
-import Mundial.*;
 import mundial.*;
 import java.io.File;
 import java.util.Scanner;
@@ -159,7 +158,7 @@ public class MenuCRUD extends javax.swing.JFrame {
                 while(lector.hasNext()){
                     contador++;
                     texto = lector.nextLine().split("#");
-                    if(texto.length == limites[tipo]){
+                    if(texto.length == limites[tipo] || (tipo == 3 && texto.length == 3)){
                         if(!guardar(texto)){
                             mensajeError += contador + ", ";
                             error = true;
@@ -206,12 +205,22 @@ public class MenuCRUD extends javax.swing.JFrame {
                 case 3:
                     Jugador jugador = buscarJugador(datos[0]);
                     if(Mundial.estampas == null){
-                        Mundial.estampas = new ListaGeneral(new NodoGeneral(new Estampa(datos[0], datos[1],Integer.valueOf(datos[2]), datos[3])));
-                        jugador.setEstampa((Estampa)Mundial.estampas.nodoFinal.getItem());
+                        if(datos.length == 4){
+                            Mundial.estampas = new ListaGeneral(new NodoGeneral(new Estampa(datos[0], datos[1],Integer.valueOf(datos[2]), datos[3])));
+                        }else{
+                            Mundial.estampas = new ListaGeneral(new NodoGeneral(new Estampa(datos[0], datos[1],Integer.valueOf(datos[2]), "")));
+                        }
+                        jugador.setEstampa((Estampa)Mundial.estampas.nodoInicio.getItem());
+                        Mundial.numeroEstampas++;
                     }else{
                         if(jugador.getEstampa() == null){
-                            Mundial.estampas.crearNodo(new Estampa(datos[0], datos[1],Integer.valueOf(datos[2]), datos[3]));
+                            if(datos.length == 4){
+                                Mundial.estampas.crearNodo(new Estampa(datos[0], datos[1],Integer.valueOf(datos[2]), datos[3]));
+                            }else{
+                                Mundial.estampas.crearNodo(new Estampa(datos[0], datos[1],Integer.valueOf(datos[2]), ""));
+                            }
                             jugador.setEstampa((Estampa)Mundial.estampas.nodoFinal.getItem());
+                            Mundial.numeroEstampas++;
                         }else{
                             return false;
                         }
@@ -238,7 +247,7 @@ public class MenuCRUD extends javax.swing.JFrame {
     private Jugador buscarJugador(String nombre){
         NodoGeneral actual = Mundial.jugadores.nodoInicio;
         while(actual != null){
-            if(((Jugador)actual.getItem()).getNombre().equals(nombre)){
+            if(((Jugador)actual.getItem()).getNombre().contains(nombre)){
                 return (Jugador)actual.getItem();
             }
             actual = actual.getSiguiente();

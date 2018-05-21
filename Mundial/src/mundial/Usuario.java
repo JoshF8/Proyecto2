@@ -4,13 +4,15 @@
  * and open the template in the editor.
  */
 package mundial;
-
+import Listas.*;
 /**
  *
  * @author Josh
  */
 public class Usuario {
     private String CUI, Nombre, Contra, Correo, Nac, Nick;
+    public int sobresAbiertos, estampasColocadas;
+    public ListaGeneral sobres, album;
     
     public Usuario(String CUI, String Nombre, String Nac, String Correo, String Nick, String Contra){
         this.CUI = CUI;
@@ -20,7 +22,8 @@ public class Usuario {
         this.Nick = Nick;
         this.Contra = Contra;
     }
-
+    
+    
     public String getCUI() {
         return CUI;
     }

@@ -129,9 +129,11 @@ public class FormularioEstampa extends javax.swing.JFrame {
             if(Mundial.estampas == null){
                 Mundial.estampas = new ListaGeneral(new NodoGeneral(new Estampa(jugador.getNombre(), jugador.getCodigoEquipo(), ComboRareza.getSelectedIndex(), TextoImagen.getText())));
                 jugador.setEstampa((Estampa)Mundial.estampas.nodoFinal.getItem());
+                Mundial.numeroEstampas++;
             }else{
                 Mundial.estampas.crearNodo((new Estampa(jugador.getNombre(), jugador.getCodigoEquipo(), ComboRareza.getSelectedIndex(), TextoImagen.getText())));
                 jugador.setEstampa((Estampa)Mundial.estampas.nodoFinal.getItem());
+                Mundial.numeroEstampas++;
             }
             JOptionPane.showMessageDialog(null, "Estampa guardada con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
             vaciar();
